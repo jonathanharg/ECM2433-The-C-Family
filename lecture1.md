@@ -36,7 +36,18 @@ int main()                      // main function
 }                               // end block/scope
 ```
 
-diagram slide 16
+# The C Family
+```mermaid
+stateDiagram
+    state "Objective-C" as m
+    C --> C++
+    C --> m
+    m --> Java
+    C++ --> Java
+    Java --> C#
+    C++ --> C#
+
+```
 
 # GNU: GNU's not Unix
 Free, UNIX-compoatible operating system launched by Richard Stallman in 1983.
