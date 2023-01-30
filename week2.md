@@ -103,9 +103,9 @@ int main ()
 This code will produce the same 10 pseudo random numbers each time. The next random number depends on the last, and will eventually loop back to the begining.
 
 **Simple algorithm**
-$$
+$$$
     j := (j \times\ a\ +\ c)\ \%\ m
-$$
+$$$
 
 This algorithm is a (terrible) way to generate pseudo random numbers.
 
