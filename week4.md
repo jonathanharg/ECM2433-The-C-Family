@@ -64,3 +64,95 @@ int myList[] = {4 ,6 ,8 ,3 ,2 ,1 ,5 ,9 ,0};
 int len = sizeof(myList)/sizeof(int); /* Number of elements in myList */
 qsort(myList,len, sizeof(int), &CompareFunction);
 ```
+
+## Structures
+
+A variable that groups multiple items togheter, closest thing to a class.
+
+```c
+struct structName
+{
+    char varA;
+    int varB;
+}
+```
+
+
+```c
+struct bookStruct
+{
+    char title[181] = "";
+    char author[51] = "";
+    float price;
+    int numPages;
+};
+
+int main ()
+{
+    struct bookStruct myBook;
+    struct bookStruct anotherBook;
+
+    myBook.price = 12.99;
+    strcpy(myBook.title,"The Joy of Programming in C");
+    anotherBook = myBook;
+    return 0;
+}
+```
+
+## typedef
+
+You can define your own datatypes using the `typedef` command:
+
+```c
+typedef struct bookStruct BOOK;
+```
+
+then we can use
+
+```
+BOOK myBook;
+```
+
+which is the same as
+
+```c
+struct bookStruct myBook;
+```
+
+Structures are often used in association with a pointer.
+
+```c
+BOOK *secondBook; /* a pointer */
+if ( ( secondBook = (BOOK *)malloc(sizeof(BOOK)) ) == NULL )
+{ /* error: not enough memory */ }
+strcpy(secondBook->title, "Hidden Figures");
+strcpy(secondBook->author, "Margot Lee Shetterly");
+secondBook->price = 8.99;
+secondBook->numPages = 384;
+```
+
+`secondBook->price` is shorthand for `(*secondBook).price`.
+
+### Example: Linked List
+
+```c
+struct anode
+{
+    /* some data variables here, e.g.: */
+    char data;
+    struct anode *nextNode; // Note: a pointer to anode, not anode!
+};
+typedef struct anode NODE;
+
+NODE *root = NULL;
+```
+
+```c
+NODE *newNode;
+if ( !(newNode = (NODE *)malloc(sizeof(NODE)))) { /* error */ }
+
+newNode->data = 'A';
+ndeNode->nextNode = NULL;
+
+root = newNode;
+```
