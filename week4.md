@@ -156,3 +156,91 @@ ndeNode->nextNode = NULL;
 
 root = newNode;
 ```
+
+## Input and Output
+
+`scanf()` is like the reverse `printf()`
+
+```c
+#include <stdio.h>
+int main()
+{
+    int k;
+    do {
+	printf("Please enter an integer: ");
+	if (scanf("%d", &k) != 1)
+	    break;
+	printf("Read %d\n", k);
+    } while (1);
+    return 0;
+}
+```
+
+### Stream
+
+A stream is an abstraction of a file that provides a consisten interface to the programmer, regardless of the actual device.
+
+A stream is buffered, so that data is not necessarily written to the device when the write command is issued. You can force the write to happen by flushing a stream.
+
+May be text or binary. Needs to include `stdio.h`
+
+### Errors
+
+Errors from when system calls fail is comunicated through `errno`, a global variable.
+
+```c
+#include <errno.h>
+
+int main (...)
+{
+    printf("Unable to read file %s: %d: %s\n", argv[1], errno, strerror(errno));
+}
+```
+
+```c
+#include <stdio.h>
+#include <stdlib.h>
+#include <errno.h>
+#include <string.h>
+int main ()
+{
+    int *p = NULL;
+    if (!(p = (int *)malloc(100000000000000*sizeof(int) ))) {
+        printf("Malloc failed. %d: %s\n", errno, strerror(errno));
+        return -1;
+    }
+    /* Do something with p */
+    return 0;
+}
+```
+
+`Malloc failed. 12: Cannot allocate memory`
+
+A call to `ferror(fp)`
+- determines whether the most recent operation on the file pointed to by fp produced an error
+- returns 1 if an error occurred; 0 if not
+- value is reset by each file operation
+
+### Write to a Stream
+- `fputc(ch, fp)`
+- `fputs(str, fp)`
+- `fprintf(fp, "character %c, integer %03d", ch, i)`
+
+### Write to a Stream
+- `char ch = fgetc(fp)`
+- `fgets(str,count,fp)`
+- `fscanf(fp, "%d,%d", &x, &y)`
+
+### Other common stream functions
+- `fflush(fp)`
+- `remove("myFile.txt")`
+- `rewind(fp)`
+
+### Standard streams
+- `stdin` input from the termin
+- `stdout` output to the terminal; normal program output
+- `stderr` output to the terminal; error and warning messages
+
+`scanf` reads input from `stdin`; equivalent to `fscanf(stdin,...)`
+
+`printf` sends output to `stdout`; equivalent to `fprintf(stdout,...)`
